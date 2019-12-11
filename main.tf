@@ -36,7 +36,7 @@ terraform {
   backend "s3" {
     # Replace this with your bucket name!
     bucket = "mark-kharitonov-terraform-up-and-running-state"
-    key    = "global/s3/terraform.tfstate"
+    key    = "workspaces-example/terraform.tfstate"
     region = "us-east-2"
     # Replace this with your DynamoDB table name!
     dynamodb_table = "terraform-up-and-running-locks"
@@ -52,4 +52,9 @@ output "s3_bucket_arn" {
 output "dynamodb_table_name" {
   value       = aws_dynamodb_table.terraform_locks.name
   description = "The name of the DynamoDB table"
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
 }
