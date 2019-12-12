@@ -15,5 +15,6 @@ terraform {
 }
 
 module "webserver_cluster" {
-  source = "../../../modules/services/webserver-cluster"
+  source       = "../../../modules/services/webserver-cluster"
+  cluster_name = "webservers-stage"
 }

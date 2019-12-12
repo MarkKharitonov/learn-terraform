@@ -26,13 +26,13 @@ resource "aws_autoscaling_group" "example" {
 
   tag {
     key                 = "Name"
-    value               = "terraform-asg-example"
+    value               = "${var.cluster_name}-asg"
     propagate_at_launch = true
   }
 }
 
 resource "aws_elb" "example" {
-  name               = "terraform-asg-example"
+  name               = "${var.cluster_name}-clb"
   security_groups    = [aws_security_group.elb.id]
   availability_zones = data.aws_availability_zones.all.names
 
@@ -54,7 +54,7 @@ resource "aws_elb" "example" {
 }
 
 resource "aws_security_group" "elb" {
-  name = "terraform-example-elb"
+  name = "${var.cluster_name}-elb"
 
   # Allow all outbound
   egress {
@@ -74,7 +74,7 @@ resource "aws_security_group" "elb" {
 }
 
 resource "aws_security_group" "instance" {
-  name = "terraform-example-instance"
+  name = "${var.cluster_name}-instance"
   ingress {
     from_port   = var.server_port
     to_port     = var.server_port

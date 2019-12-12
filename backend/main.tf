@@ -3,7 +3,8 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "mark-kharitonov-terraform-up-and-running-state"
+  bucket        = "mark-kharitonov-terraform-up-and-running-state"
+  force_destroy = true
 
   # Enable versioning so we can see the full revision history of our
   # state files
